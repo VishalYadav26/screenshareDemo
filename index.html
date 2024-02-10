@@ -17,11 +17,16 @@
     </div>
     <script>
         document.getElementById('start').onclick = async () => {
-            try {
-                const screen = await navigator.mediaDevices.getDisplayMedia({ video: true });
-                document.getElementById('video').srcObject = screen;
-            } catch (error) {
-                console.error("Error accessing screen share:", error);
+            if (navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
+                // Handle screen sharing for mobile devices differently (if needed)
+                alert("Screen sharing is not supported on mobile devices.");
+            } else {
+                try {
+                    const screen = await navigator.mediaDevices.getDisplayMedia({ video: true });
+                    document.getElementById('video').srcObject = screen;
+                } catch (error) {
+                    console.error("Error accessing screen share:", error);
+                }
             }
         };
 
